@@ -1,12 +1,16 @@
 package com.ryan.rutilslib;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 /**
  * Created by Ryan on 2017/12/1.
  */
 
 public class LogUtil {
+
+    private static Context mContext;
 
     public static final int LEVEL_VERBOSE = 1;
     public static final int LEVEL_DEBUG = 2;
@@ -16,7 +20,7 @@ public class LogUtil {
     public static final int LEVEL_NOTHING = 6;
     public static int LEVEL = LEVEL_VERBOSE;
 
-    public static String TAG = "ryan";
+    public static String TAG = "Ryan";
 
     public static void v(String tag,String msg){
         if(LEVEL <=LEVEL_VERBOSE){
@@ -62,6 +66,19 @@ public class LogUtil {
 
     public static void e(String msg){
         e(TAG,msg);
+    }
+
+    public static void toast(Context context, String msg){
+        if(LEVEL <=LEVEL_VERBOSE){
+            Toast.makeText(getApplicationContext(context), msg, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private static Context getApplicationContext(Context context){
+        if (mContext == null){
+            mContext = context.getApplicationContext();
+        }
+        return mContext;
     }
 
 }
